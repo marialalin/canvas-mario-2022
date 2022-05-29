@@ -14,7 +14,8 @@ class Enemy {
     this.ay = fromSky ? 0.2 : 0;
     this.ax = fromSky ? 0 : -0.2;
 
-    new Audio("./audio/fireball.wav").play();
+    this.audio = new Audio("./audio/fireball.wav")
+    this.audio.play();
 
     // TODO: init enemy. set x,y randomly top or right.
     // TODO: play fireball audio
@@ -22,10 +23,24 @@ class Enemy {
 
   draw() {
     // TODO: draw circle
+    this.ctx.beginPath();
+    this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    this.ctx.fill();
+    this.ctx.closePath();
   }
 
   move() {
     // TODO: move, add a to v and v to position
+    
+    if (!fromSky) {
+      this.y += this.vy
+      this.vy += this.ay
+    } else {
+      this.x += this.vx
+      this.vx += this.ax
+    }
+    
+
   }
 
   isVisible() {
